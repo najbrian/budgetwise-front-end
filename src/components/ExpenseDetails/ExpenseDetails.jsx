@@ -23,19 +23,27 @@ const ExpenseDetails = (props) => {
         <p>Expense Type: {expense.type}</p>
         <p>Expense Amount: {expense.amount}</p>
       </header>
-      {/* <section>
+      <section>
         <h2>Expense Notes:</h2>
-        <ul>
-          {expense.notes.map(note => {
-            return (
-              <li key={note._id}>{note.name} <p>Created on {new Date(note.createdAt).toLocaleDateString()} at {new Date(note.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</p>
-                <button>Edit</button>
-                <button>Delete</button>
-              </li>
-            )
-          })}
-        </ul>
-      </section> */}
+        {console.log(expense.notes)
+          ?
+          <ul>
+            {expense.notes.map(note => {
+              return (
+                <li key={note._id}>{note.name} <p>Created on {new Date(note.createdAt).toLocaleDateString()} at {new Date(note.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</p>
+                  <button>Edit</button>
+                  <button>Delete</button>
+                </li>
+              )
+            })}
+          </ul>
+          :
+          <>
+            <p>There are no notes</p>
+            <button>Add Notes</button>
+          </>
+        }
+      </section>
     </main>
   );
 }

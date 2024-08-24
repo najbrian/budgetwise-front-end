@@ -85,6 +85,7 @@ const showExpense = async (budgetId, expenseId) => {
     console.log(error)
   }
 }
+
 const createExpense = async (budgetId, expenseData) => {
   try {
     const res = await fetch(`${BASE_URL}/${budgetId}/expenses`, {

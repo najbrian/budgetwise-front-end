@@ -23,7 +23,7 @@ const ExpenseDetails = (props) => {
         <p>Expense Type: {expense.type}</p>
         <p>Expense Amount: {expense.amount}</p>
       </header>
-      <section>
+      {/* <section>
         <h2>Expense Notes:</h2>
         <ul>
           {expense.notes.map(note => {
@@ -35,7 +35,7 @@ const ExpenseDetails = (props) => {
             )
           })}
         </ul>
-      </section>
+      </section> */}
     </main>
   );
 }

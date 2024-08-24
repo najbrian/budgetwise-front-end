@@ -14,6 +14,8 @@ const BudgetDetails = (props) => {
     const fetchBudget = async () => {
       const budgetData = await budgetService.showBudget(budgetId)
       setBudget(budgetData)
+      const budgets = await budgetService.indexBudgets()
+      props.setBudgets(budgets)
     }
     fetchBudget()
   }, [budgetId])
@@ -36,7 +38,7 @@ const BudgetDetails = (props) => {
           {budget.expense.map(expense => {
             return (
               <Link key={expense._id} to={`/budgets/${budgetId}/expenses/${expense._id}`}>
-                <li>{expense.name} <p>Created on {new Date(expense.createdAt).toLocaleDateString()} at {new Date(expense.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</p></li>
+                <li>{expense.name} created on {new Date(expense.createdAt).toLocaleDateString()} at {new Date(expense.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</li>
               </Link>
             )
           })}

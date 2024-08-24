@@ -22,7 +22,7 @@ const App = () => {
   // const [expenses, setExpenses] = useState([])
 
   const navigate = useNavigate()
-
+  
   useEffect(() => {
     const fetchBudgets = async () => {
       const budgetData = await budgetService.indexBudgets()
@@ -69,9 +69,9 @@ const App = () => {
           {user ? (
             <>
               <Route path="/" element={<Dashboard user={user} />} />
-              <Route path="/budgets" element={<BudgetList budgets={budgets}/>} />
+              <Route path="/budgets" element={<BudgetList budgets={budgets} />} />
               <Route path="/budgets/new" element={<BudgetForm handleAddBudget={handleAddBudget}/>} />
-              <Route path="/budgets/:budgetId" element={<BudgetDetails handleDeleteBudget={handleDeleteBudget}/>} />
+              <Route path="/budgets/:budgetId" element={<BudgetDetails handleDeleteBudget={handleDeleteBudget} setBudgets={setBudgets}/>} />
               <Route path="/budgets/:budgetId/edit" element={<BudgetForm handleUpdateBudget={handleUpdateBudget} />}/>
               <Route path="/budgets/:budgetId/expenses/new" element={<ExpenseForm handleAddExpense={handleAddExpense}/>}/>
               <Route path="/budgets/:budgetId/expenses/:expenseId" element={<ExpenseDetails />}/>

@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 
 const BudgetList = (props) => {
+
   return (
     <main>
       <h1>My Budgets</h1>
@@ -11,7 +12,7 @@ const BudgetList = (props) => {
           </Link>
         ))}
       </ul>
-        <Link to={'/budgets/new'}><p>Add New Budget</p></Link>
+      <Link to={'/budgets/new'}><p>Add New Budget</p></Link>
     </main>
   );
 }

@@ -10,6 +10,8 @@ import BudgetDetails from './components/BudgetDetails/BudgetDetails'
 import * as authService from '../src/services/authService' // import the authservice
 import * as budgetService from './services/budgetService'
 import BudgetForm from './components/BudgetForm/BudgetForm'
+import ExpenseForm from './components/ExpenseForm/ExpenseForm'
+import ExpenseDetails from './components/ExpenseDetails/ExpenseDetails'
 
 
 export const AuthedUserContext = createContext(null);
@@ -17,6 +19,7 @@ export const AuthedUserContext = createContext(null);
 const App = () => {
   const [user, setUser] = useState(authService.getUser()); // using the method from authservice
   const [budgets, setBudgets] = useState([])
+  // const [expenses, setExpenses] = useState([])
 
   const navigate = useNavigate()
 
@@ -32,6 +35,24 @@ const App = () => {
     const newBudget = await budgetService.createBudget(budgetData)
     setBudgets([newBudget, ...budgets])
     navigate('/budgets')
+  }
+
+  const handleUpdateBudget = async (budgetId, budgetData) => {
+    const updatedBudget = await budgetService.updateBudget(budgetId, budgetData)
+    setBudgets(budgets.filter((budget) => budgetId === budget._id ? updatedBudget : budget))
+    navigate(`/budgets/${budgetId}`)
+  }
+  
+  const handleDeleteBudget = async (budgetId) => {
+    const deletedBudget = await budgetService.deleteBudget(budgetId)
+    setBudgets(budgets.filter((budget) => budget._id !== deletedBudget._id))
+    navigate('/budgets')
+  }
+
+  const handleAddExpense = async (budgetId, expenseData) => {
+    const addExpense = await budgetService.createExpense(budgetId, expenseData)
+    // setExpenses(addExpense)
+    navigate(`/budgets/${budgetId}`)
   }
 
 
@@ -50,7 +71,10 @@ const App = () => {
               <Route path="/" element={<Dashboard user={user} />} />
               <Route path="/budgets" element={<BudgetList budgets={budgets}/>} />
               <Route path="/budgets/new" element={<BudgetForm handleAddBudget={handleAddBudget}/>} />
-              <Route path="/budgets/:budgetId" element={<BudgetDetails />} />
+              <Route path="/budgets/:budgetId" element={<BudgetDetails handleDeleteBudget={handleDeleteBudget}/>} />
+              <Route path="/budgets/:budgetId/edit" element={<BudgetForm handleUpdateBudget={handleUpdateBudget} />}/>
+              <Route path="/budgets/:budgetId/expenses/new" element={<ExpenseForm handleAddExpense={handleAddExpense}/>}/>
+              <Route path="/budgets/:budgetId/expenses/:expenseId" element={<ExpenseDetails />}/>
             </>
           ) : (
             <Route path="/" element={<Landing />} />

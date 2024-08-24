@@ -1,6 +1,6 @@
 const BASE_URL = `${import.meta.env.VITE_EXPRESS_BACKEND_URL}/budgets`
 
-const index = async () => {
+const indexBudgets = async () => {
   try {
     const res = await fetch(BASE_URL, {
       headers: {
@@ -13,9 +13,9 @@ const index = async () => {
   }
 }
 
-const show = async (budgetId) => {
-  try{
-    const res = fetch(`${BASE_URL}/${budgetId}`, {
+const showBudget = async (budgetId) => {
+  try {
+    const res = await fetch(`${BASE_URL}/${budgetId}`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem('token')}`
       }
@@ -26,6 +26,26 @@ const show = async (budgetId) => {
   }
 }
 
+const createBudget = async (budgetFormData) => {
+  try {
+    const res = await fetch (BASE_URL, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(budgetFormData),
+    })
+    console.log(res)
+    return res.json()
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+
 export {
-  index,
+  indexBudgets,
+  showBudget,
+  createBudget,
 }

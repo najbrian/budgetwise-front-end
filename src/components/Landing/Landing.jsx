@@ -1,3 +1,11 @@
+import styled from "styled-components";
+
+const StyledMain = styled.main`
+display: flex;
+width: 100%;
+justify-content: flex-start;
+`
+
 const Landing = () => {
   return (
     <main>

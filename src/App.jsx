@@ -12,8 +12,7 @@ import * as budgetService from './services/budgetService'
 import BudgetForm from './components/BudgetForm/BudgetForm'
 import ExpenseForm from './components/ExpenseForm/ExpenseForm'
 import ExpenseDetails from './components/ExpenseDetails/ExpenseDetails'
-
-
+import './App.css'
 export const AuthedUserContext = createContext(null);
 
 const App = () => {

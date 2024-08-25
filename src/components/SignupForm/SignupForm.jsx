@@ -1,6 +1,7 @@
-import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import * as authService from '../../services/authService';
+import { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import * as authService from '../../services/authService'
+import styled from 'styled-components'
 
 const SignupForm = (props) => {
   const navigate = useNavigate();
@@ -40,12 +41,12 @@ const SignupForm = (props) => {
   };
 
   return (
-    <main className='flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8'>
+    <main>
       <h1>Sign Up</h1>
       <p>{message}</p>
-      <form onSubmit={handleSubmit} className="space-y-6">
+      <form onSubmit={handleSubmit}>
         <div>
-          <label htmlFor="firstname" className="block text-sm font-medium leading-6 text-gray-900">First Name:</label>
+          <label htmlFor="firstname">First Name:</label>
           <input
             type="text"
             id="firstname"

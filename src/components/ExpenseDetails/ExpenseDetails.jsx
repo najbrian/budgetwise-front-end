@@ -50,7 +50,7 @@ const ExpenseDetails = (props) => {
           <ul>
             {expense.notes.map(note => {
               return (
-                <li key={note._id}>{note.name} <p>Created on {new Date(note.createdAt).toLocaleDateString()} at {new Date(note.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</p>
+                <li key={note._id}>{note.name} <p>created on {new Date(note.createdAt).toLocaleDateString()} at {new Date(note.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</p>
                   <button>Edit</button>
                   <button>Delete</button>
                 </li>

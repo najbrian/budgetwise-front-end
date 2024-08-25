@@ -19,6 +19,7 @@ export const AuthedUserContext = createContext(null);
 const App = () => {
   const [user, setUser] = useState(authService.getUser()); // using the method from authservice
   const [budgets, setBudgets] = useState([])
+  const [isFormOpen, setIsFormOpen] = useState(false)
   // const [expenses, setExpenses] = useState([])
 
   const navigate = useNavigate()
@@ -55,6 +56,21 @@ const App = () => {
     navigate(`/budgets/${budgetId}`)
   }
 
+  const handleUpdateExpense = async (budgetId, expenseId, expenseData) => {
+    const editExpense = await budgetService.updateExpense(budgetId, expenseId, expenseData)
+    navigate(`/budgets/${budgetId}/expenses/${expenseId}`)
+  }
+
+  const handleDeleteExpense = async (budgetId, expenseId) => {
+    const deleteExpense = await budgetService.deleteExpense(budgetId, expenseId)
+    navigate(`/budgets/${budgetId}`)
+  }
+
+  const handleAddNote = async (budgetId, expenseId, noteData) => {
+    const addNote = await budgetService.createNote(budgetId, expenseId, noteData)
+    navigate(`/budgets/${budgetId}/expenses/${expenseId}`)
+    setIsFormOpen(false)
+  }
 
   const handleSignout = () => {
     authService.signout();
@@ -74,7 +90,8 @@ const App = () => {
               <Route path="/budgets/:budgetId" element={<BudgetDetails handleDeleteBudget={handleDeleteBudget} setBudgets={setBudgets}/>} />
               <Route path="/budgets/:budgetId/edit" element={<BudgetForm handleUpdateBudget={handleUpdateBudget} />}/>
               <Route path="/budgets/:budgetId/expenses/new" element={<ExpenseForm handleAddExpense={handleAddExpense}/>}/>
-              <Route path="/budgets/:budgetId/expenses/:expenseId" element={<ExpenseDetails />}/>
+              <Route path="/budgets/:budgetId/expenses/:expenseId" element={<ExpenseDetails isFormOpen={isFormOpen} setIsFormOpen={setIsFormOpen} handleDeleteExpense={handleDeleteExpense} handleAddNote={handleAddNote}/>}/>
+              <Route path="/budgets/:budgetId/expenses/:expenseId/edit" element={<ExpenseForm handleUpdateExpense={handleUpdateExpense}/>}/>
             </>
           ) : (
             <Route path="/" element={<Landing />} />

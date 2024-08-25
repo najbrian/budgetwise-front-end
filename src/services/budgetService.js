@@ -86,6 +86,7 @@ const showExpense = async (budgetId, expenseId) => {
   }
 }
 
+
 const createExpense = async (budgetId, expenseData) => {
   try {
     const res = await fetch(`${BASE_URL}/${budgetId}/expenses`, {
@@ -103,6 +104,54 @@ const createExpense = async (budgetId, expenseData) => {
   }
 }
 
+const updateExpense = async (budgetId, expenseId, expenseFormData) => {
+  try {
+    const res = await fetch(`${BASE_URL}/${budgetId}/expenses/${expenseId}`, {
+      method: 'PUT',
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(expenseFormData),
+    });
+    return res.json();
+  } catch (error) {
+    console.log(res);
+    console.log(error);
+  }
+}
+
+const deleteExpense = async (budgetId, expenseId) => {
+  try {
+    const res = await fetch(`${BASE_URL}/${budgetId}/expenses/${expenseId}`, {
+      method: 'DELETE',
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      },
+    });
+    return res.json();
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+const createNote = async (budgetId, expenseId, noteData) => {
+  try {
+    const res = await fetch(`${BASE_URL}/${budgetId}/expenses/${expenseId}/notes`, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(noteData),
+    })
+    console.log(res)
+    return res.json()
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 
 export {
   indexBudgets,
@@ -112,4 +161,7 @@ export {
   deleteBudget,
   showExpense,
   createExpense,
+  updateExpense,
+  deleteExpense,
+  createNote,
 }

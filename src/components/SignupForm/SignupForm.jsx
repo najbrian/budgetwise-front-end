@@ -40,12 +40,12 @@ const SignupForm = (props) => {
   };
 
   return (
-    <main>
+    <main className='flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8'>
       <h1>Sign Up</h1>
       <p>{message}</p>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="space-y-6">
         <div>
-          <label htmlFor="firstname">First Name:</label>
+          <label htmlFor="firstname" className="block text-sm font-medium leading-6 text-gray-900">First Name:</label>
           <input
             type="text"
             id="firstname"

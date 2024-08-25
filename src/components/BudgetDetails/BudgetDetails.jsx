@@ -25,7 +25,6 @@ const BudgetDetails = (props) => {
   return (
     <main>
       <header>
-        {console.log(budget)}
         <h1>{budget.name}</h1>
         <h2>Budget Total: ${budget.amount}</h2>
         <p>Created on {new Date(budget.createdAt).toLocaleDateString()} at {new Date(budget.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</p>

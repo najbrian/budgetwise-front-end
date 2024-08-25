@@ -9,7 +9,15 @@ const ExpenseForm = (props) => {
     type: 'Misc'
   })
 
-  const { budgetId } = useParams()
+  const { budgetId, expenseId } = useParams()
+
+  useEffect(() => {
+    const fetchExpense = async () => {
+      const expenseData = await budgetService.showExpense(budgetId, expenseId)
+      setFormData(expenseData)
+    }
+    if(expenseId) fetchExpense()
+  },[expenseId])
 
   const handleChange = (evt) => {
     setFormData({ ...formData, [evt.target.name]: evt.target.value })
@@ -17,18 +25,17 @@ const ExpenseForm = (props) => {
 
   const handleSubmit = (evt) => {
     evt.preventDefault()
-    props.handleAddExpense(budgetId, formData)
-    // if (budgetId) {
-    //   props.handleUpdateBudget(budgetId, formData)
-    // } else {
-    //   props.handleAddBudget(formData)
-    // }
+    if (expenseId) {
+      props.handleUpdateExpense(budgetId, expenseId, formData)
+    } else {
+      props.handleAddExpense(budgetId, formData)
+    }
   }
 
   return (
     <main>
       <form onSubmit={handleSubmit}>
-        <h1>New Expense</h1>
+        <h1>{expenseId ? 'Edit Expense' : 'New Expense'}</h1>
         <label htmlFor="expenseform-name-input">Expense Name:</label>
         <input
           required
@@ -65,7 +72,7 @@ const ExpenseForm = (props) => {
           <option value="Misc">Misc.</option>
         </select>
 
-        <button type="submit">Submit</button>
+        <button type="submit">{expenseId ? "Submit Changes" : "Submit Expense"}</button>
       </form>
     </main>
   );

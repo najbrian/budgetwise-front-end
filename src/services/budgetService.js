@@ -152,6 +152,37 @@ const createNote = async (budgetId, expenseId, noteData) => {
   }
 }
 
+const updateNote = async (budgetId, expenseId, noteId, noteData) => {
+  try {
+    const res = await fetch(`${BASE_URL}/${budgetId}/expenses/${expenseId}/notes/${noteId}`, {
+      method: 'PUT',
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(noteData),
+    });
+    return res.json();
+  } catch (error) {
+    console.log(res);
+    console.log(error);
+  }
+}
+
+const deleteNote = async (budgetId, expenseId, noteId) => {
+  try {
+    const res = await fetch(`${BASE_URL}/${budgetId}/expenses/${expenseId}/notes/${noteId}`, {
+      method: 'DELETE',
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      },
+    });
+    return res.json();
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 
 export {
   indexBudgets,
@@ -164,4 +195,6 @@ export {
   updateExpense,
   deleteExpense,
   createNote,
+  updateNote,
+  deleteNote
 }

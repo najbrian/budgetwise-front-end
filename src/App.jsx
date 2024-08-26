@@ -18,17 +18,18 @@ export const AuthedUserContext = createContext(null);
 const App = () => {
   const [user, setUser] = useState(authService.getUser()); // using the method from authservice
   const [budgets, setBudgets] = useState([])
+
   const [isFormOpen, setIsFormOpen] = useState(false)
   // const [expenses, setExpenses] = useState([])
 
   const navigate = useNavigate()
-  
+
   useEffect(() => {
     const fetchBudgets = async () => {
       const budgetData = await budgetService.indexBudgets()
       setBudgets(budgetData)
     }
-    if(user) fetchBudgets()
+    if (user) fetchBudgets()
   }, [user])
 
   const handleAddBudget = async (budgetData) => {
@@ -42,7 +43,7 @@ const App = () => {
     setBudgets(budgets.filter((budget) => budgetId === budget._id ? updatedBudget : budget))
     navigate(`/budgets/${budgetId}`)
   }
-  
+
   const handleDeleteBudget = async (budgetId) => {
     const deletedBudget = await budgetService.deleteBudget(budgetId)
     setBudgets(budgets.filter((budget) => budget._id !== deletedBudget._id))
@@ -51,7 +52,6 @@ const App = () => {
 
   const handleAddExpense = async (budgetId, expenseData) => {
     const addExpense = await budgetService.createExpense(budgetId, expenseData)
-    // setExpenses(addExpense)
     navigate(`/budgets/${budgetId}`)
   }
 
@@ -71,6 +71,19 @@ const App = () => {
     setIsFormOpen(false)
   }
 
+  // const handleUpdateNote = async (budgetId, expenseId, noteId, noteData) => {
+  //   const updateNote = await budgetService.updateNote(budgetId, expenseId, noteId, noteData)
+  //   navigate(`/budgets/${budgetId}/expenses/${expenseId}`)
+  //   setIsFormOpen(false)
+  // }
+
+  const handleDeleteNote = async (budgetId, expenseId, noteId) => {
+    const deleteNote = await budgetService.deleteNote(budgetId, expenseId, noteId)
+    console.log(deleteNote)
+    const updatedBudgets = budgets.map((budget) => budget._id === deleteNote._id ? deleteNote : budget)
+    setBudgets(updatedBudgets)
+  }
+
   const handleSignout = () => {
     authService.signout();
     setUser(null);
@@ -83,20 +96,48 @@ const App = () => {
         <Routes>
           {user ? (
             <>
-              <Route path="/" element={<Dashboard user={user} />} />
-              <Route path="/budgets" element={<BudgetList budgets={budgets} />} />
-              <Route path="/budgets/new" element={<BudgetForm handleAddBudget={handleAddBudget}/>} />
-              <Route path="/budgets/:budgetId" element={<BudgetDetails handleDeleteBudget={handleDeleteBudget} setBudgets={setBudgets}/>} />
-              <Route path="/budgets/:budgetId/edit" element={<BudgetForm handleUpdateBudget={handleUpdateBudget} />}/>
-              <Route path="/budgets/:budgetId/expenses/new" element={<ExpenseForm handleAddExpense={handleAddExpense}/>}/>
-              <Route path="/budgets/:budgetId/expenses/:expenseId" element={<ExpenseDetails isFormOpen={isFormOpen} setIsFormOpen={setIsFormOpen} handleDeleteExpense={handleDeleteExpense} handleAddNote={handleAddNote}/>}/>
-              <Route path="/budgets/:budgetId/expenses/:expenseId/edit" element={<ExpenseForm handleUpdateExpense={handleUpdateExpense}/>}/>
+              <Route path="/" element={<Dashboard
+                user={user}
+              />} />
+              <Route path="/budgets" element={<BudgetList
+                budgets={budgets}
+              />} />
+              <Route path="/budgets/new" element={<BudgetForm
+                handleAddBudget={handleAddBudget}
+              />} />
+              <Route path="/budgets/:budgetId" element={<BudgetDetails
+                handleDeleteBudget={handleDeleteBudget}
+                setBudgets={setBudgets}
+              />} />
+              <Route path="/budgets/:budgetId/edit" element={<BudgetForm
+                handleUpdateBudget={handleUpdateBudget}
+              />} />
+              <Route path="/budgets/:budgetId/expenses/new" element={<ExpenseForm
+                handleAddExpense={handleAddExpense}
+              />} />
+              <Route path="/budgets/:budgetId/expenses/:expenseId" element={<ExpenseDetails
+                isFormOpen={isFormOpen}
+                setIsFormOpen={setIsFormOpen}
+                handleDeleteExpense={handleDeleteExpense}
+                handleAddNote={handleAddNote}
+                // handleUpdateNote={handleUpdateNote}
+                handleDeleteNote={handleDeleteNote}
+              />} />
+              <Route path="/budgets/:budgetId/expenses/:expenseId/edit" element={<ExpenseForm
+                handleUpdateExpense={handleUpdateExpense}
+              />} />
             </>
           ) : (
-            <Route path="/" element={<Landing />} />
+            <>
+              <Route path="/" element={<Landing />} />
+              <Route path="/signup" element={<SignupForm
+                setUser={setUser}
+              />} />
+              <Route path="/signin" element={<SigninForm
+                setUser={setUser}
+              />} />
+            </>
           )}
-          <Route path="/signup" element={<SignupForm setUser={setUser} />} />
-          <Route path="/signin" element={<SigninForm setUser={setUser} />} />
         </Routes>
       </AuthedUserContext.Provider>
     </>

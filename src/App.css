@@ -1,8 +1,5 @@
-html {
+html, #root {
   background-color: rgb(232, 241, 220);
-}
-
-#root {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;

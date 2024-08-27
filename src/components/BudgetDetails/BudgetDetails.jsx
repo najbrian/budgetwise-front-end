@@ -86,8 +86,8 @@ const BudgetDetails = (props) => {
           </ul>
           <button onClick={() => { navigate(`/budgets/${budgetId}/expenses/new`) }}>Add Expense</button>
         </div>
-        
-        <div style={{ width: '50%' }}>
+
+        <div style={{ width: '20%' }}>
           <h2>Current Total: ${runningTotal}</h2>
           <Doughnut
             data={data}

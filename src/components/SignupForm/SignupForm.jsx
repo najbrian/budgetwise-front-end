@@ -1,7 +1,12 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import {StyledMain} from './style'
 import * as authService from '../../services/authService'
-import styled from 'styled-components'
+
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import Stack from '@mui/material/Stack';
 
 const SignupForm = (props) => {
   const navigate = useNavigate();
@@ -41,72 +46,105 @@ const SignupForm = (props) => {
   };
 
   return (
-    <main>
+    <StyledMain>
       <h1>Sign Up</h1>
       <p>{message}</p>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="firstname">First Name:</label>
-          <input
-            type="text"
-            id="firstname"
-            value={firstname}
-            name="firstname"
-            onChange={handleChange}
-          />
-          <label htmlFor="lastname">Last Name:</label>
-          <input
-            type="text"
-            id="lastname"
-            value={lastname}
-            name="lastname"
-            onChange={handleChange}
-          />
-          <label htmlFor="email">Email:</label>
-          <input
-            type="text"
-            id="email"
-            value={email}
-            name="email"
-            onChange={handleChange}
-          />
-          <label htmlFor="username">Username:</label>
-          <input
-            type="text"
-            id="name"
-            value={username}
-            name="username"
-            onChange={handleChange}
-          />
-        </div>
-        <div>
-          <label htmlFor="password">Password:</label>
-          <input
-            type="password"
-            id="password"
-            value={password}
-            name="password"
-            onChange={handleChange}
-          />
-        </div>
-        <div>
-          <label htmlFor="confirm">Confirm Password:</label>
-          <input
-            type="password"
-            id="confirm"
-            value={passwordConf}
-            name="passwordConf"
-            onChange={handleChange}
-          />
-        </div>
-        <div>
-          <button disabled={isFormInvalid()}>Sign Up</button>
-          <Link to="/">
-            <button>Cancel</button>
-          </Link>
-        </div>
-      </form>
-    </main>
+      <Box
+        component="form"
+        sx={{
+          '& > :not(style)': { m: 1, width: '25ch' },
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          mt: '30px',
+        }}
+        noValidate
+        autoComplete="off"
+        onSubmit={handleSubmit}
+      >
+
+        <TextField
+          label="First Name"
+          id="firstname"
+          name="firstname"
+          variant="filled"
+          value={firstname}
+          onChange={handleChange}
+        />
+        <TextField
+          label="Last Name"
+          id="lastname"
+          name="lastname"
+          variant="filled"
+          value={lastname}
+          onChange={handleChange}
+        />
+        <TextField
+          label="Desired username"
+          id="name"
+          name="username"
+          variant="filled"
+          value={username}
+          onChange={handleChange}
+        />
+
+        <TextField
+          label="Email"
+          id="email"
+          name="email"
+          variant="filled"
+          value={email}
+          onChange={handleChange}
+        />
+        <TextField
+          label="Password"
+          type="password"
+          id="password"
+          name="password"
+          variant="filled"
+          value={password}
+          onChange={handleChange}
+        />
+        <TextField
+          label="Confirm Password"
+          type="password"
+          id="confirm"
+          name="passwordConf"
+          variant="filled"
+          value={passwordConf}
+          onChange={handleChange}
+        />
+        <Button
+          variant="contained"
+          type="submit"
+          disabled={isFormInvalid()}
+          sx={{
+            bgcolor: 'rgb(232, 241, 220)',
+            color: 'rgb(67,146,138)',
+            '&:hover': {
+              bgcolor: 'rgb(67,146,138)',
+              color: 'rgb(232, 241, 220)',
+            }
+          }}>
+          Sign Up
+        </Button>
+        <Link to="/">
+          <Button
+            variant="contained"
+            sx={{
+              bgcolor: 'rgb(232, 241, 220)',
+              color: 'rgb(67,146,138)',
+              width: '80%',
+              '&:hover': {
+                bgcolor: 'rgb(67,146,138)',
+                color: 'rgb(232, 241, 220)',
+              }
+            }}>
+            Cancel
+          </Button>
+        </Link>
+      </Box>
+    </StyledMain>
   );
 };
 

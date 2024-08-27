@@ -59,7 +59,7 @@ const NavBar = ({ handleSignout }) => {
       'Home': '/',
       'My Budgets': '/budgets'
     }
-    if (navigationMap[button]) {navigate(navigationMap[button])}
+    if (navigationMap[button]) { navigate(navigationMap[button]) }
     setOpen(false)
   }
 
@@ -73,7 +73,7 @@ const NavBar = ({ handleSignout }) => {
       {user ? (
         <>
           <StyledNav>
-          <StyledImg src="https://i.imgur.com/KKIzDIh.png" alt='budgetwise-logo' onClick={() => navigate('/')}/>
+            <StyledImg src="https://i.imgur.com/KKIzDIh.png" alt='budgetwise-logo' onClick={() => navigate('/')} />
             <Stack direction="row" spacing={2}>
               <div>
                 <Button
@@ -82,6 +82,7 @@ const NavBar = ({ handleSignout }) => {
                   aria-controls={open ? 'composition-menu' : undefined}
                   aria-expanded={open ? 'true' : undefined}
                   aria-haspopup="true"
+                  sx={{ color: 'rgb(67,146,138)' }}
                   onClick={handleToggle}
                 >
                   Menu
@@ -125,7 +126,7 @@ const NavBar = ({ handleSignout }) => {
         </>
       ) : (
         <StyledNav>
-          <StyledImg src="https://i.imgur.com/KKIzDIh.png" alt='budgetwise-logo' onClick={() => navigate('/')}/>
+          <StyledImg src="https://i.imgur.com/KKIzDIh.png" alt='budgetwise-logo' onClick={() => navigate('/')} />
           <Stack direction="row" spacing={2}>
             <div>
               <Button

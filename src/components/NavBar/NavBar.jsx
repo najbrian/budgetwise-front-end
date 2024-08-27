@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { AuthedUserContext } from '../../App'
 import { useContext } from 'react'
-import { StyledImg, StyledNav, StyledUl } from './style.js'
+import { StyledImg, StyledNav, StyledUl } from './style'
 const NavBar = ({ handleSignout }) => {
   const user = useContext(AuthedUserContext)
 

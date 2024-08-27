@@ -1,8 +1,12 @@
+html {
+  background-color: rgb(232, 241, 220);
+}
+
 #root {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
   color: black;
-  font-family: 'Poppins'
+  font-family: 'Poppins';
 }

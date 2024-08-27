@@ -5,7 +5,7 @@ import Landing from './components/Landing/Landing'
 import Dashboard from './components/Dashboard/Dashboard'
 import SignupForm from './components/SignupForm/SignupForm'
 import SigninForm from './components/SigninForm/SigninForm'
-import BudgetList from './components/BudgetList/BudgetList'
+import BudgetList from './components/BudgetList/BudgetList.jsx'
 import BudgetDetails from './components/BudgetDetails/BudgetDetails'
 import * as authService from '../src/services/authService' // import the authservice
 import * as budgetService from './services/budgetService'

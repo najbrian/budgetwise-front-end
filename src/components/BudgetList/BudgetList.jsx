@@ -1,4 +1,4 @@
-import { StyledBudgetListDiv, Budgets } from './style'
+import { Budgets, StyledLinks, StyledBudget } from './style'
 
 import { Link } from "react-router-dom";
 
@@ -6,12 +6,8 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemButton from '@mui/material/ListItemButton';
-import Box from '@mui/material/Box';
-import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
-import EditIcon from '@mui/icons-material/Edit';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import NavigationIcon from '@mui/icons-material/Navigation';
+import Fab from '@mui/material/Fab';
 
 
 const BudgetList = (props) => {
@@ -20,14 +16,23 @@ const BudgetList = (props) => {
     totalBudget = totalBudget + budget.amount
   })
 
+  const total = props.budgets.reduce((acc, {name, amount}) => {
+    acc[name]
+      ? acc[name] += amount
+      : acc[name] = amount
+    return acc
+  }, {})
+
+  
+  const options={}
+
   return (
     <main>
       <h1>My Budgets</h1>
-      <StyledBudgetListDiv>
-        <Budgets>
+        <StyledBudget>
           <List sx={{ width: '100%', maxWidth: 360, fontFamily: 'Poppins' }}>
             {props.budgets.map((budget) => (
-              <Link key={budget._id} to={`/budgets/${budget._id}`}>
+              <StyledLinks key={budget._id} to={`/budgets/${budget._id}`}>
                 <ListItem disablePadding>
                   <ListItemButton>
                     <ListItemText
@@ -35,15 +40,15 @@ const BudgetList = (props) => {
                       secondary={`Budget Amount: $${budget.amount}`} />
                   </ListItemButton>
                 </ListItem>
-              </Link>
+              </StyledLinks>
 
             ))}
           </List>
-        </Budgets>
+        </StyledBudget>
+       
         <div className="total-budget-div">
-          <h2>Total Budget: {totalBudget}</h2>
+          <h2>Total Budget: ${totalBudget}</h2>
         </div>
-      </StyledBudgetListDiv>
 
       <Link
         to={'/budgets/new'}

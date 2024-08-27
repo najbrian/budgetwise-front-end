@@ -4,6 +4,7 @@ const StyledNav = styled.nav`
 display: flex;
 justify-content: space-between;
 align-items: center;
+width: '100vw';
 `
 
 const StyledImg = styled.img`
@@ -14,14 +15,7 @@ cursor: pointer;
 }
 `
 
-const StyledUl = styled.ul`
-  list-style-type: none;
-  display: flex;
-  gap: 20px;
-`
-
 export {
   StyledNav,
   StyledImg,
-  StyledUl,
 }

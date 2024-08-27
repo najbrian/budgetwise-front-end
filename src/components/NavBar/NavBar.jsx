@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import { AuthedUserContext } from '../../App'
 import { useContext, useState, useRef, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { StyledImg, StyledNav, StyledUl } from './style'
+import { StyledImg, StyledNav } from './style'
 import React from 'react'
 
 
@@ -15,10 +15,18 @@ import MenuItem from '@mui/material/MenuItem';
 import MenuList from '@mui/material/MenuList';
 import Stack from '@mui/material/Stack';
 
+
 const NavBar = ({ handleSignout }) => {
   const [open, setOpen] = useState(false);
-  const anchorRef = useRef(null)
+  const anchorRef = React.useRef(null)
   const navigate = useNavigate()
+
+  const handleTestFix = (e) => {
+    handleSignout()
+    handleClick(e)
+  }
+
+
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen);
   };
@@ -27,7 +35,6 @@ const NavBar = ({ handleSignout }) => {
     if (anchorRef.current && anchorRef.current.contains(event.target)) {
       return;
     }
-
     setOpen(false);
   };
 
@@ -57,7 +64,8 @@ const NavBar = ({ handleSignout }) => {
       'Log In': '/signin',
       'Sign Up': '/signup',
       'Home': '/',
-      'My Budgets': '/budgets'
+      'My Budgets': '/budgets',
+      'Sign Out': '/'
     }
     if (navigationMap[button]) { navigate(navigationMap[button]) }
     setOpen(false)
@@ -75,52 +83,55 @@ const NavBar = ({ handleSignout }) => {
           <StyledNav>
             <StyledImg src="https://i.imgur.com/KKIzDIh.png" alt='budgetwise-logo' onClick={() => navigate('/')} />
             <Stack direction="row" spacing={2}>
-              <div>
-                <Button
-                  ref={anchorRef}
-                  id="composition-button"
-                  aria-controls={open ? 'composition-menu' : undefined}
-                  aria-expanded={open ? 'true' : undefined}
-                  aria-haspopup="true"
-                  sx={{ color: 'rgb(67,146,138)' }}
-                  onClick={handleToggle}
-                >
-                  Menu
-                </Button>
-                <Popper
-                  open={open}
-                  anchorEl={anchorRef.current}
-                  role={undefined}
-                  placement="bottom-start"
-                  transition
-                  disablePortal
-                >
-                  {({ TransitionProps, placement }) => (
-                    <Grow
-                      {...TransitionProps}
-                      style={{
-                        transformOrigin:
-                          placement === 'bottom-start' ? 'left top' : 'left bottom',
-                      }}
-                    >
-                      <Paper>
-                        <ClickAwayListener onClickAway={handleClose}>
-                          <MenuList
-                            autoFocusItem={open}
-                            id="composition-menu"
-                            aria-labelledby="composition-button"
-                            onKeyDown={handleListKeyDown}
-                          >
-                            <MenuItem onClick={(evt) => handleClick(evt)}>Home</MenuItem>
-                            <MenuItem onClick={(evt) => handleClick(evt)}>My Budgets</MenuItem>
-                            <MenuItem onClick={handleSignout}>Sign Out</MenuItem>
-                          </MenuList>
-                        </ClickAwayListener>
-                      </Paper>
-                    </Grow>
-                  )}
-                </Popper>
-              </div>
+              <Button
+                ref={anchorRef}
+                id="composition-button"
+                aria-controls={open ? 'composition-menu' : undefined}
+                aria-expanded={open ? 'true' : undefined}
+                aria-haspopup="true"
+                sx={{ color: 'rgb(67,146,138)', }}
+                onClick={handleToggle}
+              >
+                Menu
+              </Button>
+              <Popper
+                open={open}
+                anchorEl={anchorRef.current}
+                role={undefined}
+                placement="bottom-start"
+                popperOptions={{ positionFixed: true, preventOverflow: true }}
+                transition
+                disablePortal
+              >
+                {({ TransitionProps, placement }) => (
+                  <Grow
+                    {...TransitionProps}
+                    style={{
+                      anchorOrigin: {
+                        vertical: 'top',
+                        horizontal: 'right'
+                      }
+                    }}
+                  >
+                    <Paper>
+                      <ClickAwayListener onClickAway={handleClose}>
+                        <MenuList
+                          autoFocusItem={open}
+                          id="composition-menu"
+                          aria-labelledby="composition-button"
+                          sx = {{
+                          }}
+                          onKeyDown={handleListKeyDown}
+                        >
+                          <MenuItem onClick={(evt) => handleClick(evt)}>Home</MenuItem>
+                          <MenuItem onClick={(evt) => handleClick(evt)}>My Budgets</MenuItem>
+                          <MenuItem onClick={handleTestFix}>Sign Out</MenuItem>
+                        </MenuList>
+                      </ClickAwayListener>
+                    </Paper>
+                  </Grow>
+                )}
+              </Popper>
             </Stack>
           </StyledNav>
         </>

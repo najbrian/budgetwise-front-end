@@ -79,7 +79,6 @@ const App = () => {
 
   const handleDeleteNote = async (budgetId, expenseId, noteId) => {
     const deleteNote = await budgetService.deleteNote(budgetId, expenseId, noteId)
-    console.log(deleteNote)
     const updatedBudgets = budgets.map((budget) => budget._id === deleteNote._id ? deleteNote : budget)
     setBudgets(updatedBudgets)
   }

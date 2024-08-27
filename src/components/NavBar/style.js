@@ -7,7 +7,12 @@ align-items: center;
 `
 
 const StyledImg = styled.img`
-width: 40px;`
+width: 40px;
+
+&:hover {
+cursor: pointer;
+}
+`
 
 const StyledUl = styled.ul`
   list-style-type: none;

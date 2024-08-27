@@ -1,13 +1,12 @@
-import styled from "styled-components";
+import { StyledH2 } from './style'
 
 const Landing = () => {
   return (
     <main>
-      <h1>Hello, you are on the landing page for visitors.</h1>
-      <h3>
-        If you sign up for a new account, you will have the ability to sign in
-        and see your super secret dashboard.
-      </h3>
+      <StyledH2>Effortlessly track and optimize your finances with our intuitive budget manager.</StyledH2>
+      <p>
+      Take control of your finances with ease. Track spending, set goals, and get insightful reports—all in one place. Start optimizing your budget today.
+      </p>
     </main>
   );
 };

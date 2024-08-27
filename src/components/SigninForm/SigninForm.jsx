@@ -49,7 +49,7 @@ const SigninForm = (props) => {
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
-          mt: '80px',
+          mt: '40px',
         }}
         noValidate
         autoComplete="off"
@@ -62,6 +62,7 @@ const SigninForm = (props) => {
           variant="filled"
           value={formData.username}
           onChange={handleChange}
+          required
         />
         <TextField
           label="Password"
@@ -70,6 +71,7 @@ const SigninForm = (props) => {
           variant="filled"
           value={formData.password}
           onChange={handleChange}
+          required
         />
         <Button
           variant="contained"
@@ -100,6 +102,7 @@ const SigninForm = (props) => {
           </Button>
         </Link>
       </Box>
+
     </ main>
   );
 };

@@ -16,6 +16,7 @@ const Landing = () => {
         onClick={() => navigate('/signin')}
         variant="contained"
         sx={{
+          mt: '50px',
           mr: '10px',
           bgcolor: 'rgb(67,146,138)',
           color: 'rgb(232, 241, 220)',
@@ -30,6 +31,7 @@ const Landing = () => {
         onClick={() => navigate('/signup')}
         variant="contained"
         sx={{
+          mt: '50px',
           mr: '10px',
           bgcolor: 'rgb(232, 241, 220)',
           color: 'rgb(67,146,138)',

@@ -21,7 +21,7 @@ const Landing = () => {
           bgcolor: 'rgb(67,146,138)',
           color: 'rgb(232, 241, 220)',
           '&:hover': {
-            bgcolor: 'rgb(232, 241, 220)',
+            bgcolor: 'rgb(232, 241, 230)',
             color: 'rgb(67,146,138)'
           }
         }}>
@@ -33,7 +33,7 @@ const Landing = () => {
         sx={{
           mt: '50px',
           mr: '10px',
-          bgcolor: 'rgb(232, 241, 220)',
+          bgcolor: 'rgb(232, 241, 230)',
           color: 'rgb(67,146,138)',
           '&:hover': {
             bgcolor: 'rgb(67,146,138)',

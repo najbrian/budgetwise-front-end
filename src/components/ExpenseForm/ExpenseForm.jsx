@@ -46,7 +46,11 @@ const ExpenseForm = (props) => {
     <main>
       <h1>{expenseId ? 'Edit Expense' : 'New Expense'}</h1>
       <form onSubmit={handleSubmit}>
-        <Box sx={{ minWidth: 120 }} >
+        <Box sx={{ 
+          minWidth: 120,
+          display: 'flex',
+          justifyContent: 'center',
+          }} >
 
           <TextField
             required
@@ -69,7 +73,7 @@ const ExpenseForm = (props) => {
             value={formData.amount}
             onChange={handleChange}
           />
-          <FormControl >
+          <FormControl sx={{width: '250px'}}>
             <InputLabel htmlFor="expenseform-type-input">Expense Type</InputLabel>
             <Select
               required

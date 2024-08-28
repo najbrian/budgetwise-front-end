@@ -43,8 +43,12 @@ const BudgetForm = (props) => {
   return (
     <main>
       <form onSubmit={handleSubmit}>
-        <Box sx={{ minWidth: 120 }} >
-          <h1>{budgetId ? `Edit Budget` : 'Create New Budget'}</h1>
+        <h1>{budgetId ? `Edit Budget` : 'Create New Budget'}</h1>
+        <Box sx={{ 
+          minWidth: 120,
+          display: 'flex',
+          justifyContent: 'center',
+          }} >
 
           <TextField
             variant="filled"

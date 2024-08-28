@@ -131,8 +131,6 @@ const BudgetDetails = (props) => {
                   </ListItemButton>
                 </ListItem>
               </StyledLink>
-
-
             ))}
           </List>
 

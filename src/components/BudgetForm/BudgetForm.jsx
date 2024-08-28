@@ -2,6 +2,14 @@ import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import * as budgetService from '../../services/budgetService'
 
+import Box from '@mui/material/Box';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+
 const BudgetForm = (props) => {
   const [formData, setFormData] = useState({
     name: '',
@@ -28,34 +36,40 @@ const BudgetForm = (props) => {
       const budgetData = await budgetService.showBudget(budgetId)
       setFormData(budgetData)
     }
-    if(budgetId) fetchBudget()
-  },[budgetId])
+    if (budgetId) fetchBudget()
+  }, [budgetId])
 
 
   return (
     <main>
       <form onSubmit={handleSubmit}>
-        <h1>{budgetId ? `Edit Budget` : 'Create New Budget'}</h1>
-        <label htmlFor="budgetform-name-input">Budget Name:</label>
-        <input
-          required
-          type="text"
-          name="name"
-          id="budgetform-name-input"
-          value={formData.name}
-          onChange={handleChange}
-        />
-        <label htmlFor="budgetform-amount-input">Amount</label>
-        <input
-          required
-          type="number"
-          name="amount"
-          id="budgetform-amount-input"
-          min="0"
-          value={formData.amount}
-          onChange={handleChange}
-        />
-        <button type="submit">{budgetId ? 'Submit Changes' : 'Submit New Budget'}</button>
+        <Box sx={{ minWidth: 120 }} >
+          <h1>{budgetId ? `Edit Budget` : 'Create New Budget'}</h1>
+
+          <TextField
+            variant="filled"
+            label="Budget Name"
+            required
+            type="text"
+            name="name"
+            id="budgetform-name-input"
+            value={formData.name}
+            onChange={handleChange}
+          />
+          <TextField
+            variant="filled"
+            label="Budget Amount"
+            required
+            type="number"
+            name="amount"
+            id="budgetform-amount-input"
+            min="0"
+            value={formData.amount}
+            onChange={handleChange}
+          />
+          <Button variant="contained" type='submit'>{budgetId ? 'Submit Changes' : 'Submit New Budget'}</Button>
+
+        </Box>
       </form>
     </main>
   );

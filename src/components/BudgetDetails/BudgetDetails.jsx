@@ -4,7 +4,16 @@ import { AuthedUserContext } from "../../App"
 import * as budgetService from "../../services/budgetService"
 import { Doughnut } from 'react-chartjs-2'
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js'
-import { StyledSection } from './style'
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
+import ListItemButton from '@mui/material/ListItemButton';
+import AddIcon from '@mui/icons-material/Add';
+import Fab from '@mui/material/Fab';
+import ButtonGroup from '@mui/material/ButtonGroup';
+import Button from '@mui/material/Button';
+
+import { StyledLink, StyledSection, StyledBudgetButtonDiv } from './style'
 
 
 
@@ -60,7 +69,6 @@ const BudgetDetails = (props) => {
 
   const runningTotal = dataValues.reduce((acc, element) => acc += element, 0)
 
-  console.log(data)
   const options = {}
 
   return (
@@ -68,26 +76,80 @@ const BudgetDetails = (props) => {
       <header>
         <h1>{budget.name}</h1>
         <h2>Budget Total: ${budget.amount}</h2>
+        <h3>Remaining Total: ${budget.amount - runningTotal}</h3>
         <p>Created on {new Date(budget.createdAt).toLocaleDateString()} at {new Date(budget.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</p>
-        <button onClick={() => { navigate(`/budgets/${budgetId}/edit`) }}>Edit</button>
-        <button onClick={() => { props.handleDeleteBudget(budgetId) }}>Delete</button>
+        <StyledBudgetButtonDiv>
+          <ButtonGroup
+            disableElevation
+            variant="contained"
+            aria-label="Disabled button group"
+          >
+            <Button
+              onClick={() => { navigate(`/budgets/${budgetId}/edit`) }}
+              sx={{
+                bgcolor: 'rgb(67,146,138)',
+                color: 'rgb(232, 241, 220)',
+                '&:hover': {
+                }
+              }}
+            >
+              Edit
+            </Button>
+            <Button
+              onClick={() => { props.handleDeleteBudget(budgetId) }}
+              sx={{
+                bgcolor: 'rgb(67,146,138)',
+                color: 'rgb(232, 241, 220)',
+                '&:hover' : {
+                }
+              }}
+            >
+              Delete
+            </Button>
+          </ButtonGroup>
+          <Link to={`/budgets/`}>Go Back</Link>
+        </StyledBudgetButtonDiv>
       </header>
       <StyledSection>
-      <div>
+        <div>
           <h2>Expenses</h2>
-          <ul>
-            {budget.expense.map(expense => {
-              return (
-                <Link key={expense._id} to={`/budgets/${budgetId}/expenses/${expense._id}`}>
-                  <li>{expense.name} created on {new Date(expense.createdAt).toLocaleDateString()} at {new Date(expense.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</li>
-                </Link>
-              )
-            })}
-          </ul>
-          <button onClick={() => { navigate(`/budgets/${budgetId}/expenses/new`) }}>Add Expense</button>
+          <List sx={{ width: '100%', maxWidth: 360, fontFamily: 'Poppins' }}>
+            {budget.expense.map((expense) => (
+              <StyledLink key={expense._id} to={`/budgets/${budgetId}/expenses/${expense._id}`}>
+                <ListItem disablePadding>
+                  <ListItemButton >
+                    <ListItemText
+                      primary={`Expense: ${expense.name}`}
+                      secondary={
+                        <>
+                          {`Amount: $${expense.amount}`}
+                          <br />
+                          {`Created: ${new Date(expense.createdAt).toLocaleDateString()} at ${new Date(expense.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`}
+                        </>
+                      }
+                    />
+                  </ListItemButton>
+                </ListItem>
+              </StyledLink>
+
+
+            ))}
+          </List>
+
+          <Link
+            to={`/budgets/${budgetId}/expenses/new`}
+          >
+            <Fab color="primary" variant="extended">
+              <AddIcon sx={{ mr: 1 }} />
+              Add Expense
+            </Fab>
+          </Link>
         </div>
 
-        <div style={{ width: '20%' }}>
+        <div style={{
+          width: '50%',
+          maxWidth: '440px'
+        }}>
           <h2>Current Total: ${runningTotal}</h2>
           <Doughnut
             data={data}
@@ -95,7 +157,7 @@ const BudgetDetails = (props) => {
           >
           </Doughnut>
         </div>
-        
+
       </StyledSection>
     </main>
   );

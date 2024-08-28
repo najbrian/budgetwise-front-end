@@ -14,6 +14,8 @@ import Popper from '@mui/material/Popper';
 import MenuItem from '@mui/material/MenuItem';
 import MenuList from '@mui/material/MenuList';
 import Stack from '@mui/material/Stack';
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+
 
 
 const NavBar = ({ handleSignout }) => {
@@ -89,10 +91,17 @@ const NavBar = ({ handleSignout }) => {
                 aria-controls={open ? 'composition-menu' : undefined}
                 aria-expanded={open ? 'true' : undefined}
                 aria-haspopup="true"
-                sx={{ color: 'rgb(67,146,138)', }}
+                sx={{
+                  color: 'rgb(67, 146, 138)',
+                  '&:hover': {
+                    bgcolor: 'rgb(67, 146, 138)',
+                    color: 'rgb(232, 241, 220)',
+                  }
+                }}
+                
                 onClick={handleToggle}
               >
-                Menu
+                {user.username}<ArrowDropDownIcon/>
               </Button>
               <Popper
                 open={open}
@@ -119,7 +128,7 @@ const NavBar = ({ handleSignout }) => {
                           autoFocusItem={open}
                           id="composition-menu"
                           aria-labelledby="composition-button"
-                          sx = {{
+                          sx={{
                           }}
                           onKeyDown={handleListKeyDown}
                         >
@@ -138,52 +147,38 @@ const NavBar = ({ handleSignout }) => {
       ) : (
         <StyledNav>
           <StyledImg src="https://i.imgur.com/KKIzDIh.png" alt='budgetwise-logo' onClick={() => navigate('/')} />
-          <Stack direction="row" spacing={2}>
-            <div>
-              <Button
-                ref={anchorRef}
-                id="composition-button"
-                aria-controls={open ? 'composition-menu' : undefined}
-                aria-expanded={open ? 'true' : undefined}
-                aria-haspopup="true"
-                onClick={handleToggle}
-              >
-                Menu
-              </Button>
-              <Popper
-                open={open}
-                anchorEl={anchorRef.current}
-                role={undefined}
-                placement="bottom-start"
-                transition
-                disablePortal
-              >
-                {({ TransitionProps, placement }) => (
-                  <Grow
-                    {...TransitionProps}
-                    style={{
-                      transformOrigin:
-                        placement === 'bottom-start' ? 'left top' : 'left bottom',
-                    }}
-                  >
-                    <Paper>
-                      <ClickAwayListener onClickAway={handleClose}>
-                        <MenuList
-                          autoFocusItem={open}
-                          id="composition-menu"
-                          aria-labelledby="composition-button"
-                          onKeyDown={handleListKeyDown}
-                        >
-                          <MenuItem onClick={(evt) => handleClick(evt)}>Log In</MenuItem>
-                          <MenuItem onClick={(evt) => handleClick(evt)}>Sign Up</MenuItem>
-                        </MenuList>
-                      </ClickAwayListener>
-                    </Paper>
-                  </Grow>
-                )}
-              </Popper>
-            </div>
-          </Stack>
+          <div>
+            <Button
+              onClick={() => navigate('/signin')}
+              variant="contained"
+              sx={{
+                mt: '50px',
+                mr: '10px',
+                bgcolor: 'rgb(67,146,138)',
+                color: 'rgb(232, 241, 220)',
+                '&:hover': {
+                  bgcolor: 'rgb(232, 241, 230)',
+                  color: 'rgb(67,146,138)'
+                }
+              }}>
+              Log In
+            </Button>
+            <Button
+              onClick={() => navigate('/signup')}
+              variant="contained"
+              sx={{
+                mt: '50px',
+                mr: '10px',
+                bgcolor: 'rgb(232, 241, 230)',
+                color: 'rgb(67,146,138)',
+                '&:hover': {
+                  bgcolor: 'rgb(67,146,138)',
+                  color: 'rgb(232, 241, 220)',
+                }
+              }}>
+              Sign Up
+            </Button>
+          </div>
         </StyledNav>
       )}
 

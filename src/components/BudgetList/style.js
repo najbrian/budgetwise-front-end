@@ -2,8 +2,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 const Budgets=styled.div`
-font-family: 'Poppins';
-`
+color: pink;`
 
 const StyledLinks = styled(Link)`
     text-decoration: none;

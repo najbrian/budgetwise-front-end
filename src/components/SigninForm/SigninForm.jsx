@@ -1,7 +1,10 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import * as authService from '../../services/authService';
-import {} from './style'
+import {
+  StyledMain,
+  StyledDiv
+} from './style'
 
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
@@ -38,71 +41,72 @@ const SigninForm = (props) => {
   };
 
   return (
-    <main>
-      <h1>Log In</h1>
-      <p>{message}</p>
-      <Box
-        component="form"
-        sx={{
-          '& > :not(style)': { m: 1, width: '25ch' },
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          mt: '40px',
-        }}
-        noValidate
-        autoComplete="off"
-        onSubmit={handleSubmit}
-      >
-        <TextField
-          label="Username"
-          id="username"
-          name="username"
-          variant="filled"
-          value={formData.username}
-          onChange={handleChange}
-          required
-        />
-        <TextField
-          label="Password"
-          id="password"
-          name="password"
-          variant="filled"
-          value={formData.password}
-          onChange={handleChange}
-          required
-        />
-        <Button
-          variant="contained"
-          type="submit"
+    <StyledMain>
+      <StyledDiv>
+        <h1>Log In</h1>
+        <p>{message}</p>
+        <Box
+          component="form"
           sx={{
-            bgcolor: 'rgb(232, 241, 220)',
-            color: 'rgb(67,146,138)',
-            '&:hover': {
-              bgcolor: 'rgb(67,146,138)',
-              color: 'rgb(232, 241, 220)',
-            }
-          }}>
-          Log In
-        </Button>
-        <Link to="/">
+            '& > :not(style)': { m: 1, width: '25ch' },
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            mt: '40px',
+          }}
+          noValidate
+          autoComplete="off"
+          onSubmit={handleSubmit}
+        >
+          <TextField
+            label="Username"
+            id="username"
+            name="username"
+            variant="filled"
+            value={formData.username}
+            onChange={handleChange}
+            required
+          />
+          <TextField
+            label="Password"
+            id="password"
+            name="password"
+            variant="filled"
+            value={formData.password}
+            onChange={handleChange}
+            required
+          />
           <Button
             variant="contained"
+            type="submit"
             sx={{
               bgcolor: 'rgb(232, 241, 220)',
               color: 'rgb(67,146,138)',
-              width: '80%',
               '&:hover': {
                 bgcolor: 'rgb(67,146,138)',
                 color: 'rgb(232, 241, 220)',
               }
             }}>
-            Cancel
+            Log In
           </Button>
-        </Link>
-      </Box>
-
-    </ main>
+          <Link to="/">
+            <Button
+              variant="contained"
+              sx={{
+                bgcolor: 'rgb(232, 241, 220)',
+                color: 'rgb(67,146,138)',
+                width: '80%',
+                '&:hover': {
+                  bgcolor: 'rgb(67,146,138)',
+                  color: 'rgb(232, 241, 220)',
+                }
+              }}>
+              Cancel
+            </Button>
+          </Link>
+        </Box>
+      </StyledDiv>
+    </ StyledMain>
   );
 };
 

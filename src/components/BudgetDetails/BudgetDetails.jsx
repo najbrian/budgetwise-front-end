@@ -82,12 +82,12 @@ const BudgetDetails = (props) => {
     { field: 'type', headerName: 'Type', width: 150 },
     {
       field: 'name', headerName: 'Name', width: 150, renderCell: ({ row }) => (
-        <Link 
-          to={`/budgets/${budgetId}/expenses/${row.id}`} 
+        <Link
+          to={`/budgets/${budgetId}/expenses/${row.id}`}
           style={{ textDecoration: 'none' }}
         >
           {row.name}
-  
+
         </Link>
       ),
     },
@@ -136,25 +136,29 @@ const BudgetDetails = (props) => {
       <StyledSection>
         <div>
           <h2>Expenses</h2>
-          {!budget.expense.length &&
+          {!budget.expense.length
+            ?
             <p>There are no expenses</p>
+            :
+            <div>
+              <DataGrid
+                rows={rows}
+                columns={columns}
+                rowsPerPageOptions={[5, 10, 20]}
+                slots={{ toolbar: GridToolbar }}
+                sx={{
+                  '& .MuiDataGrid-cell': {
+                    backgroundColor: 'rgba(255, 255, 255, 0.2)',
+                  },
+                  '& .MuiDataGrid-columnHeader': {
+                    backgroundColor: 'rgba(25, 118, 210, 0.6)',
+                  },
+                }}
+              />
+            </div>
+
           }
-          <div>
-            <DataGrid
-              rows={rows}
-              columns={columns}
-              rowsPerPageOptions={[5, 10, 20]}
-              slots={{ toolbar: GridToolbar }}
-              sx={{
-                '& .MuiDataGrid-cell': {
-                  backgroundColor: 'rgba(255, 255, 255, 0.2)',
-                },
-                '& .MuiDataGrid-columnHeader': {
-                  backgroundColor: 'rgba(25, 118, 210, 0.6)',
-                },
-              }}
-            />
-          </div>
+
 
           <Link
             to={`/budgets/${budgetId}/expenses/new`}

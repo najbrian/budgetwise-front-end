@@ -164,8 +164,8 @@ const NavBar = ({ handleSignout }) => {
                 bgcolor: 'rgb(67,146,138)',
                 color: 'rgb(232, 241, 220)',
                 '&:hover': {
-                  bgcolor: 'rgb(232, 241, 230)',
-                  color: 'rgb(67,146,138)'
+                  opacity: '0.7',
+                  color: 'rgb(232, 241, 220)',
                 }
               }}>
               Log In
@@ -179,7 +179,7 @@ const NavBar = ({ handleSignout }) => {
                 bgcolor: 'rgb(232, 241, 230)',
                 color: 'rgb(67,146,138)',
                 '&:hover': {
-                  bgcolor: 'rgb(67,146,138)',
+                  opacity: '0.7',
                   color: 'rgb(232, 241, 220)',
                 }
               }}>

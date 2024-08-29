@@ -9,6 +9,8 @@ import Button from '@mui/material/Button';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
+import DeleteTwoToneIcon from '@mui/icons-material/DeleteTwoTone';
+
 
 const ExpenseDetails = (props) => {
   const { budgetId, expenseId } = useParams()
@@ -49,10 +51,10 @@ const ExpenseDetails = (props) => {
   return (
     <main>
       <header>
-        <h1>{expense.name}</h1>
+        <h1>Expense: {expense.name}</h1>
         <p>Created on {new Date(expense.createdAt).toLocaleDateString()} at {new Date(expense.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</p>
-        <p>Expense Type: {expense.type}</p>
-        <p>Expense Amount: {expense.amount ? `$${expense.amount.toLocaleString('en-US')}` : 'Loading...'}</p>
+        <p>Expense Type: <strong>{expense.type}</strong></p>
+        <p>Expense Amount: <strong>{expense.amount ? `$${expense.amount.toLocaleString('en-US')}` : 'Loading...'}</strong></p>
         <StyledBudgetButtonDiv>
           <ButtonGroup
             disableElevation
@@ -62,7 +64,6 @@ const ExpenseDetails = (props) => {
             <Button
               onClick={() => { navigate(`/budgets/${budgetId}/expenses/${expenseId}/edit`) }}
               sx={{
-                bgcolor: 'rgb(67,146,138)',
                 color: 'rgb(232, 241, 220)',
                 '&:hover': {
                 }
@@ -73,7 +74,6 @@ const ExpenseDetails = (props) => {
             <Button
               onClick={() => { props.handleDeleteExpense(budgetId, expenseId) }}
               sx={{
-                bgcolor: 'rgb(67,146,138)',
                 color: 'rgb(232, 241, 220)',
                 '&:hover': {
                 }
@@ -85,24 +85,28 @@ const ExpenseDetails = (props) => {
           <Link to={`/budgets/${budgetId}`}>Go Back</Link>
         </StyledBudgetButtonDiv>
       </header>
-      <section>
+      <StyledSection>
         <h2>Expense Notes:</h2>
         {expense?.notes?.length
           ? <>
-            <List sx={{ width: '100%', maxWidth: 360, fontFamily: 'Poppins' }}>
+            <List sx={{ width: '100%', maxWidth: 500, display: 'flex', flexDirection: 'column' }}>
               {expense.notes.map(note => (
                 <ListItem disablePadding>
+
                   <ListItemText
-                    primary={`Note: ${note.text}`}
+                    primary={`${note.text}`}
                     secondary={
                       `Created: ${new Date(note.createdAt).toLocaleDateString()} at ${new Date(note.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`
                     }
                   />
+                  <DeleteTwoToneIcon
+                    onClick={() => {handleDeleteNote(note._id)}}
+                    sx={{cursor: 'pointer'}}
+                  />
                 </ListItem>
-
-
               ))}
             </List>
+
             {props.isFormOpen &&
               <Box
                 component="form"
@@ -131,14 +135,12 @@ const ExpenseDetails = (props) => {
                 <Button type="submit" variant="contained" size="medium">Submit</Button>
               </Box>
             }
-
             <Button
               onClick={() => { props.setIsFormOpen(!props.isFormOpen) }}
               variant="contained"
               size="medium">
               {!props.isFormOpen ? 'Add Notes' : 'Cancel'}
             </Button>
-
           </>
           :
           <>
@@ -191,7 +193,7 @@ const ExpenseDetails = (props) => {
             }
           </>
         }
-      </section>
+      </StyledSection>
     </main>
   );
 }

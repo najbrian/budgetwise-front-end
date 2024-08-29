@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import { AuthedUserContext } from '../../App'
 import { useContext, useState, useRef, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { StyledImg, StyledNav } from './style'
+import { StyledImg, StyledNav, StyledNavLoggedIn, LogoDiv, StyledH2, GuestDiv } from './style'
 import React from 'react'
 
 
@@ -82,8 +82,11 @@ const NavBar = ({ handleSignout }) => {
     <>
       {user ? (
         <>
-          <StyledNav>
-            <StyledImg src="https://i.imgur.com/tBxDpVk.png" alt='budgetwise-logo' onClick={() => navigate('/')} />
+          <StyledNavLoggedIn>
+            <LogoDiv>
+              <StyledImg src="https://i.imgur.com/tBxDpVk.png" alt='budgetwise-logo' onClick={() => navigate('/')} />
+              <StyledH2 onClick={() => navigate('/')}>BudgetWise</StyledH2>
+            </LogoDiv>
             <Stack direction="row" spacing={2}>
               <Button
                 ref={anchorRef}
@@ -98,10 +101,10 @@ const NavBar = ({ handleSignout }) => {
                     color: 'rgb(232, 241, 220)',
                   }
                 }}
-                
+
                 onClick={handleToggle}
               >
-                {user.username}<ArrowDropDownIcon/>
+                {user.username}<ArrowDropDownIcon />
               </Button>
               <Popper
                 open={open}
@@ -142,13 +145,16 @@ const NavBar = ({ handleSignout }) => {
                 )}
               </Popper>
             </Stack>
-          </StyledNav>
+          </StyledNavLoggedIn>
 
         </>
       ) : (
         <StyledNav>
-          <StyledImg src="https://i.imgur.com/tBxDpVk.png" alt='budgetwise-logo' onClick={() => navigate('/')} />
-          <div>
+          <LogoDiv>
+            <StyledImg src="https://i.imgur.com/tBxDpVk.png" alt='budgetwise-logo' onClick={() => navigate('/')} />
+            <StyledH2 onClick={() => navigate('/')}>BudgetWise</StyledH2>
+          </LogoDiv>
+          <GuestDiv>
             <Button
               onClick={() => navigate('/signin')}
               variant="contained"
@@ -179,7 +185,7 @@ const NavBar = ({ handleSignout }) => {
               }}>
               Sign Up
             </Button>
-          </div>
+          </GuestDiv>
         </StyledNav>
       )}
 

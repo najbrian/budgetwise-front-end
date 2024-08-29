@@ -54,7 +54,7 @@ const BudgetList = (props) => {
       <div className="total-budget-div">
         <h2>Total of Budgets: ${totalBudget.toLocaleString('en-US')}</h2>
         <StyledBudget>
-        <div style={{
+          <div style={{
             width: '50%',
             maxWidth: '440px'
           }}>
@@ -74,20 +74,20 @@ const BudgetList = (props) => {
                   </ListItemButton>
                 </ListItem>
               </StyledLinks>
-
             ))}
+            <Link
+              to={'/budgets/new'}
+            >
+              <Fab color="primary" variant="extended" sx={{mt: '20px'}}
+              >
+                <AddIcon sx={{ mr: 1 }} />
+                Add New Budget
+              </Fab>
+            </Link>
           </List>
+
         </StyledBudget>
       </div>
-
-      <Link
-        to={'/budgets/new'}
-      >
-        <Fab color="primary" variant="extended">
-          <AddIcon sx={{ mr: 1 }} />
-          Add New Budget
-        </Fab>
-      </Link>
     </main>
   );
 }

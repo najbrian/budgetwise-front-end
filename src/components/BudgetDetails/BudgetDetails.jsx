@@ -4,14 +4,13 @@ import { AuthedUserContext } from "../../App"
 import * as budgetService from "../../services/budgetService"
 import { Doughnut } from 'react-chartjs-2'
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js'
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemText from '@mui/material/ListItemText';
-import ListItemButton from '@mui/material/ListItemButton';
 import AddIcon from '@mui/icons-material/Add';
 import Fab from '@mui/material/Fab';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import Button from '@mui/material/Button';
+import { DataGrid, GridToolbar } from '@mui/x-data-grid';
+
+
 
 import { StyledLink, StyledSection, StyledBudgetButtonDiv } from './style'
 
@@ -56,12 +55,12 @@ const BudgetDetails = (props) => {
       data: dataValues,
       backgroundColor: [
         'rgb(255, 99, 132)',
-        'rgb(54, 162, 235)',
-        'rgb(255, 205, 86)',
         'rgb(128, 239, 128)',
         'rgb(218, 177, 218)',
         'rgb(198, 131, 70)',
         'rgb(222, 161, 147)',
+        'rgb(255, 205, 86)',
+        'rgb(54, 162, 235)',
       ],
       hoverOffset: 4
     }]
@@ -70,6 +69,32 @@ const BudgetDetails = (props) => {
   const runningTotal = dataValues.reduce((acc, element) => acc += element, 0)
 
   const options = {}
+
+  const rows = budget.expense.map((expense, index) => ({
+    id: expense._id,
+    type: expense.type,
+    name: expense.name,
+    amount: `$${expense.amount.toLocaleString('en-US')}`,
+    dateCreated: new Date(expense.createdAt).toLocaleDateString(),
+  }));
+
+  const columns = [
+    { field: 'type', headerName: 'Type', width: 150 },
+    {
+      field: 'name', headerName: 'Name', width: 150, renderCell: ({ row }) => (
+        <Link 
+          to={`/budgets/${budgetId}/expenses/${row.id}`} 
+          style={{ textDecoration: 'none' }}
+        >
+          {row.name}
+  
+        </Link>
+      ),
+    },
+    { field: 'amount', headerName: 'Amount', width: 150, type: 'number' },
+    { field: 'dateCreated', headerName: 'Date Created', width: 150 },
+  ];
+
 
   return (
     <main>
@@ -87,7 +112,6 @@ const BudgetDetails = (props) => {
             <Button
               onClick={() => { navigate(`/budgets/${budgetId}/edit`) }}
               sx={{
-                bgcolor: 'rgb(67,146,138)',
                 color: 'rgb(232, 241, 220)',
                 '&:hover': {
                 }
@@ -98,9 +122,8 @@ const BudgetDetails = (props) => {
             <Button
               onClick={() => { props.handleDeleteBudget(budgetId) }}
               sx={{
-                bgcolor: 'rgb(67,146,138)',
                 color: 'rgb(232, 241, 220)',
-                '&:hover' : {
+                '&:hover': {
                 }
               }}
             >
@@ -113,29 +136,25 @@ const BudgetDetails = (props) => {
       <StyledSection>
         <div>
           <h2>Expenses</h2>
-            {!budget.expense.length &&
+          {!budget.expense.length &&
             <p>There are no expenses</p>
-            }
-          <List sx={{ width: '100%', maxWidth: 360, fontFamily: 'Poppins' }}>
-            {budget.expense.map((expense) => (
-              <StyledLink key={expense._id} to={`/budgets/${budgetId}/expenses/${expense._id}`}>
-                <ListItem disablePadding>
-                  <ListItemButton >
-                    <ListItemText
-                      primary={`Expense: ${expense.name}`}
-                      secondary={
-                        <>
-                          {`Amount: $${expense.amount.toLocaleString('en-US')}`}
-                          <br />
-                          {`Created: ${new Date(expense.createdAt).toLocaleDateString()} at ${new Date(expense.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`}
-                        </>
-                      }
-                    />
-                  </ListItemButton>
-                </ListItem>
-              </StyledLink>
-            ))}
-          </List>
+          }
+          <div>
+            <DataGrid
+              rows={rows}
+              columns={columns}
+              rowsPerPageOptions={[5, 10, 20]}
+              slots={{ toolbar: GridToolbar }}
+              sx={{
+                '& .MuiDataGrid-cell': {
+                  backgroundColor: 'rgba(255, 255, 255, 0.2)',
+                },
+                '& .MuiDataGrid-columnHeader': {
+                  backgroundColor: 'rgba(25, 118, 210, 0.6)',
+                },
+              }}
+            />
+          </div>
 
           <Link
             to={`/budgets/${budgetId}/expenses/new`}

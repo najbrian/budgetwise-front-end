@@ -3,7 +3,8 @@ import { Link } from "react-router-dom";
 
 const StyledSection = styled.section`
 display: flex;
-justify-content: space-evenly;
+flex-direction: column;
+align-items: center;
 `
 
 const StyledLink = styled(Link)`

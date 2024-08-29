@@ -75,8 +75,8 @@ const BudgetDetails = (props) => {
     <main>
       <header>
         <h1>{budget.name}</h1>
-        <h2>Budget Total: ${budget.amount}</h2>
-        <h3>Remaining Total: ${budget.amount - runningTotal}</h3>
+        <h2>Budget Total: ${budget.amount.toLocaleString('en-US')}</h2>
+        <h3>Remaining Total: ${(budget.amount - runningTotal).toLocaleString('en-US')}</h3>
         <p>Created on {new Date(budget.createdAt).toLocaleDateString()} at {new Date(budget.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</p>
         <StyledBudgetButtonDiv>
           <ButtonGroup
@@ -113,6 +113,9 @@ const BudgetDetails = (props) => {
       <StyledSection>
         <div>
           <h2>Expenses</h2>
+            {!budget.expense.length &&
+            <p>There are no expenses</p>
+            }
           <List sx={{ width: '100%', maxWidth: 360, fontFamily: 'Poppins' }}>
             {budget.expense.map((expense) => (
               <StyledLink key={expense._id} to={`/budgets/${budgetId}/expenses/${expense._id}`}>
@@ -122,7 +125,7 @@ const BudgetDetails = (props) => {
                       primary={`Expense: ${expense.name}`}
                       secondary={
                         <>
-                          {`Amount: $${expense.amount}`}
+                          {`Amount: $${expense.amount.toLocaleString('en-US')}`}
                           <br />
                           {`Created: ${new Date(expense.createdAt).toLocaleDateString()} at ${new Date(expense.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`}
                         </>
@@ -148,7 +151,7 @@ const BudgetDetails = (props) => {
           width: '50%',
           maxWidth: '440px'
         }}>
-          <h2>Current Total: ${runningTotal}</h2>
+          <h2>Current Total: ${runningTotal.toLocaleString('en-US')}</h2>
           <Doughnut
             data={data}
             options={options}

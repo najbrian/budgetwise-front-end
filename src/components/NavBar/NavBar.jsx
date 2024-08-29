@@ -83,7 +83,7 @@ const NavBar = ({ handleSignout }) => {
       {user ? (
         <>
           <StyledNav>
-            <StyledImg src="https://i.imgur.com/KKIzDIh.png" alt='budgetwise-logo' onClick={() => navigate('/')} />
+            <StyledImg src="https://i.imgur.com/tBxDpVk.png" alt='budgetwise-logo' onClick={() => navigate('/')} />
             <Stack direction="row" spacing={2}>
               <Button
                 ref={anchorRef}
@@ -143,10 +143,11 @@ const NavBar = ({ handleSignout }) => {
               </Popper>
             </Stack>
           </StyledNav>
+
         </>
       ) : (
         <StyledNav>
-          <StyledImg src="https://i.imgur.com/KKIzDIh.png" alt='budgetwise-logo' onClick={() => navigate('/')} />
+          <StyledImg src="https://i.imgur.com/tBxDpVk.png" alt='budgetwise-logo' onClick={() => navigate('/')} />
           <div>
             <Button
               onClick={() => navigate('/signin')}

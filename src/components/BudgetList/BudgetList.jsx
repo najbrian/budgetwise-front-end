@@ -52,7 +52,7 @@ const BudgetList = (props) => {
       <h1>My Budgets</h1>
 
       <div className="total-budget-div">
-        <h2>Total Budget: ${totalBudget}</h2>
+        <h2>Total of Budgets: ${totalBudget.toLocaleString('en-US')}</h2>
         <StyledBudget>
         <div style={{
             width: '50%',
@@ -70,7 +70,7 @@ const BudgetList = (props) => {
                   <ListItemButton>
                     <ListItemText
                       primary={`Budget Name: ${budget.name}`}
-                      secondary={`Budget Amount: $${budget.amount}`} />
+                      secondary={`Budget Amount: $${budget.amount.toLocaleString('en-US')}`} />
                   </ListItemButton>
                 </ListItem>
               </StyledLinks>

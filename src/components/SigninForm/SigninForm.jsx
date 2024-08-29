@@ -69,6 +69,7 @@ const SigninForm = (props) => {
           />
           <TextField
             label="Password"
+            type="password"
             id="password"
             name="password"
             variant="filled"

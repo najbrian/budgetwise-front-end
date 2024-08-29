@@ -52,7 +52,7 @@ const ExpenseDetails = (props) => {
         <h1>{expense.name}</h1>
         <p>Created on {new Date(expense.createdAt).toLocaleDateString()} at {new Date(expense.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</p>
         <p>Expense Type: {expense.type}</p>
-        <p>Expense Amount: {expense.amount}</p>
+        <p>Expense Amount: {expense.amount ? `$${expense.amount.toLocaleString('en-US')}` : 'Loading...'}</p>
         <StyledBudgetButtonDiv>
           <ButtonGroup
             disableElevation

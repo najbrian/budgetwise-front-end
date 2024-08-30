@@ -28,8 +28,8 @@ const BudgetDetails = (props) => {
     const fetchBudget = async () => {
       const budgetData = await budgetService.showBudget(budgetId)
       setBudget(budgetData)
-      const budgets = await budgetService.indexBudgets()
-      props.setBudgets(budgets)
+      // const budgets = await budgetService.indexBudgets()
+      // props.setBudgets(budgets)
     }
     fetchBudget()
   }, [budgetId])
@@ -76,6 +76,7 @@ const BudgetDetails = (props) => {
     name: expense.name,
     amount: `$${expense.amount.toLocaleString('en-US')}`,
     dateCreated: new Date(expense.createdAt).toLocaleDateString(),
+    owner: expense.owner.username
   }));
 
   const columns = [
@@ -93,8 +94,8 @@ const BudgetDetails = (props) => {
     },
     { field: 'amount', headerName: 'Amount', width: 150, type: 'number' },
     { field: 'dateCreated', headerName: 'Date Created', width: 150 },
+    { field: 'owner', headerName: 'Created By', width: 150}
   ];
-
 
   return (
     <main>
@@ -102,7 +103,8 @@ const BudgetDetails = (props) => {
         <h1>{budget.name}</h1>
         <h2>Budget Total: ${budget.amount.toLocaleString('en-US')}</h2>
         <h3>Remaining Total: ${(budget.amount - runningTotal).toLocaleString('en-US')}</h3>
-        <p>Created on {new Date(budget.createdAt).toLocaleDateString()} at {new Date(budget.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</p>
+        <p>Created on {new Date(budget.createdAt).toLocaleDateString()} at {new Date(budget.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} by <strong>{budget.owner.username}</strong></p>
+        {budget.owner._id === user._id &&
         <StyledBudgetButtonDiv>
           <ButtonGroup
             disableElevation
@@ -130,8 +132,9 @@ const BudgetDetails = (props) => {
               Delete
             </Button>
           </ButtonGroup>
-          <Link to={`/budgets/`}>Go Back</Link>
+          <Link to={`/budgets`}>Go Back</Link>
         </StyledBudgetButtonDiv>
+         }
       </header>
       <StyledSection>
         <div>

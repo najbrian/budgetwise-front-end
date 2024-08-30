@@ -97,7 +97,6 @@ const createExpense = async (budgetId, expenseData) => {
       },
       body: JSON.stringify(expenseData),
     })
-    console.log(res)
     return res.json()
   } catch (error) {
     console.log(error)
@@ -145,7 +144,6 @@ const createNote = async (budgetId, expenseId, noteData) => {
       },
       body: JSON.stringify(noteData),
     })
-    console.log(res)
     return res.json()
   } catch (error) {
     console.log(error)

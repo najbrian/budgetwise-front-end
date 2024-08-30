@@ -14,6 +14,7 @@ const BudgetForm = (props) => {
   const [formData, setFormData] = useState({
     name: '',
     amount: '',
+    canEdit: props.canEditUsers
   })
 
   const { budgetId } = useParams()
@@ -39,16 +40,15 @@ const BudgetForm = (props) => {
     if (budgetId) fetchBudget()
   }, [budgetId])
 
-
   return (
     <main>
       <form onSubmit={handleSubmit}>
         <h1>{budgetId ? `Edit Budget` : 'Create New Budget'}</h1>
-        <Box sx={{ 
+        <Box sx={{
           minWidth: 120,
           display: 'flex',
           justifyContent: 'center',
-          }} >
+        }} >
 
           <TextField
             variant="filled"
@@ -71,6 +71,21 @@ const BudgetForm = (props) => {
             value={formData.amount}
             onChange={handleChange}
           />
+         <FormControl sx={{width: '250px'}}>
+            <InputLabel htmlFor="budgetForm-type-input">Share Budget With...</InputLabel>
+            <Select
+              required
+              labelId="budgetform-type-input"
+              id="budgetform-type-input"
+              name="canEdit"
+              value={formData.canEdit.length ? formData.canEdit : ''}
+              onChange={handleChange}
+            >
+              {props.canEditUsers.map((user) => (
+                <MenuItem key={user._id} value={user._id}>{user.username}</MenuItem>
+              ))}
+            </Select>
+          </FormControl>
           <Button variant="contained" type='submit'>{budgetId ? 'Submit Changes' : 'Submit New Budget'}</Button>
 
         </Box>

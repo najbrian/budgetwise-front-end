@@ -26,8 +26,6 @@ const ExpenseDetails = (props) => {
     setExpense(expenseData)
   }
 
-
-
   const handleChange = (evt) => {
     setFormData({ [evt.target.name]: evt.target.value })
   }
@@ -41,18 +39,18 @@ const ExpenseDetails = (props) => {
 
   const handleDeleteNote = async (noteId) => {
     props.handleDeleteNote(budgetId, expenseId, noteId)
-    // fetchExpense()
   }
 
   useEffect(() => {
     fetchExpense()
   }, [expenseId, handleDeleteNote])
 
+
   return (
     <main>
       <header>
         <h1>Expense: {expense.name}</h1>
-        <p>Created on {new Date(expense.createdAt).toLocaleDateString()} at {new Date(expense.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</p>
+        <p>Created on {new Date(expense.createdAt).toLocaleDateString()} at {new Date(expense.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} by <strong>{}</strong></p>
         <p>Expense Type: <strong>{expense.type}</strong></p>
         <p>Expense Amount: <strong>{expense.amount ? `$${expense.amount.toLocaleString('en-US')}` : 'Loading...'}</strong></p>
         <StyledBudgetButtonDiv>
@@ -91,12 +89,12 @@ const ExpenseDetails = (props) => {
           ? <>
             <List sx={{ width: '100%', maxWidth: 500, display: 'flex', flexDirection: 'column' }}>
               {expense.notes.map(note => (
-                <ListItem disablePadding>
+                <ListItem disablePadding key={note._id}>
 
                   <ListItemText
                     primary={`${note.text}`}
                     secondary={
-                      `Created: ${new Date(note.createdAt).toLocaleDateString()} at ${new Date(note.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`
+                      `Created: ${new Date(note.createdAt).toLocaleDateString()} at ${new Date(note.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} by ${note.owner.username}`
                     }
                   />
                   <DeleteTwoToneIcon

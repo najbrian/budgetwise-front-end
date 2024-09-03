@@ -124,6 +124,7 @@ const App = () => {
                 handleAddNote={handleAddNote}
                 // handleUpdateNote={handleUpdateNote}
                 handleDeleteNote={handleDeleteNote}
+                user={user}
               />} />
               <Route path="/budgets/:budgetId/expenses/:expenseId/edit" element={<ExpenseForm
                 handleUpdateExpense={handleUpdateExpense}

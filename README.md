@@ -1,8 +1,18 @@
-# React + Vite
+  <div id="description" align="center">
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+  # BudgetWise App
 
-Currently, two official plugins are available:
+  ### [CLICK TO DEMO](<ADD LINK LATER>)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+  ##### Brian Na
+
+  [![LinkedIn Badge](https://img.shields.io/badge/-@nabrian-blue?style=flat&logo=Linkedin&logoColor=black)](https://www.linkedin.com/in/nabrian/)
+
+  ## :pencil: Description
+
+  
+  BudgetWise helps you effortlessly track and optimize your finances with our intuitive budget manager.
+  
+  Take control of your finances with ease. Track spending, set goals, and get insightful reports—all in one place. Start optimizing your budget today.
+  
+  </div>

@@ -33,14 +33,15 @@ const ExpenseDetails = (props) => {
   const handleSubmit = async (evt) => {
     evt.preventDefault()
     props.handleAddNote(budgetId, expenseId, formData)
-    setFormData(initialState)
-    fetchExpense()
+    setExpense({})
+    await fetchExpense()
   }
 
   const handleDeleteNote = async (noteId) => {
     props.handleDeleteNote(budgetId, expenseId, noteId)
+    setExpense({...expense, notes: expense.notes.filter((note) => note._id !== noteId)})
   }
-
+  
   useEffect(() => {
     fetchExpense()
   }, [expenseId])
@@ -97,10 +98,12 @@ const ExpenseDetails = (props) => {
                       `Created: ${new Date(note.createdAt).toLocaleDateString()} at ${new Date(note.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} by ${note.owner.username}`
                     }
                   />
+                  {note.owner._id === props.user._id &&
                   <DeleteTwoToneIcon
                     onClick={() => {handleDeleteNote(note._id)}}
                     sx={{cursor: 'pointer'}}
                   />
+                }
                 </ListItem>
               ))}
             </List>

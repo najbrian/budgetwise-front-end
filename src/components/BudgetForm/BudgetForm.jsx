@@ -78,7 +78,7 @@ const BudgetForm = (props) => {
               labelId="budgetform-type-input"
               id="budgetform-type-input"
               name="canEdit"
-              value={formData.canEdit.length ? formData.canEdit : ''}
+              value={formData.canEdit}
               onChange={handleChange}
             >
               {props.canEditUsers.map((user) => (

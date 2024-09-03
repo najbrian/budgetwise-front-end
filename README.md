@@ -56,7 +56,6 @@
 ## :satellite: Upcoming Features
 
 - [ ] Ability to share budgets with multiple users
-
 - [ ] Filter out personally created budgets vs. shared budgets
-
 - [ ] Update styling on landing page
+- [ ] Ability to approve/deny expenses as the owner of a budget

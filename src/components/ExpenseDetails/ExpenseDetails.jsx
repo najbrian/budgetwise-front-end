@@ -43,7 +43,7 @@ const ExpenseDetails = (props) => {
 
   useEffect(() => {
     fetchExpense()
-  }, [expenseId, handleDeleteNote])
+  }, [expenseId])
 
 
   return (

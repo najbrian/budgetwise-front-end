@@ -33,8 +33,6 @@ const ExpenseDetails = (props) => {
   const handleSubmit = async (evt) => {
     evt.preventDefault()
     props.handleAddNote(budgetId, expenseId, formData)
-    setExpense({})
-    await fetchExpense()
   }
 
   const handleDeleteNote = async (noteId) => {
@@ -44,7 +42,7 @@ const ExpenseDetails = (props) => {
   
   useEffect(() => {
     fetchExpense()
-  }, [expenseId])
+  }, [expenseId, props.handleAddNote])
 
 
   return (

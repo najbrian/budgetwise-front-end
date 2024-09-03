@@ -36,7 +36,6 @@ const createBudget = async (budgetFormData) => {
       },
       body: JSON.stringify(budgetFormData),
     })
-    console.log(res)
     return res.json()
   } catch (error) {
     console.log(error)

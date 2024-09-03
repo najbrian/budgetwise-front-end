@@ -55,8 +55,8 @@
 
 ## :satellite: Upcoming Features
 
-- [:x:] Ability to share budgets with multiple users
+- [ ] Ability to share budgets with multiple users
 
-- [:x:] Filter out personally created budgets vs. shared budgets
+- [ ] Filter out personally created budgets vs. shared budgets
 
-- [:x:] Update styling on landing page
+- [ ] Update styling on landing page

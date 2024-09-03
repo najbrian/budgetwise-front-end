@@ -8,7 +8,7 @@
 
   [![LinkedIn Badge](https://img.shields.io/badge/-@nabrian-blue?style=flat&logo=Linkedin&logoColor=black)](https://www.linkedin.com/in/nabrian/)
 
-  ## :pencil: Description
+  ## Description
 
   
   BudgetWise helps you effortlessly track and optimize your finances with our intuitive budget manager.
@@ -17,29 +17,26 @@
   
   </div>
 
-    ## :camera_flash: Screenshots 
-
-  | Description | Screenshot |
-  | :---------: | ---------- |
-
-  | <h3 align="center">Log In / Sign Up</h3> | <img
+## :camera_flash: Screenshots 
+  <h3 align="center">Log In / Sign Up</h3><img
   src="https://i.imgur.com/0IGGkCD.png"
   width="700"
-  /> |
-  | <h3 align="center">Budgets Dashboard</h3> | <img
+  />
+  <h3 align="center">Budgets Dashboard</h3><img
   src="https://i.imgur.com/kZq7Uap.png"
   width="700"
-  /> |
-  | <h3 align="center">Budget Details Page</h3> | <img
+  />
+  <h3 align="center">Budget Details Page</h3><img
   src="https://i.imgur.com/ByGGlwp.png"
   width="700"
-  /> |
-  | <h3 align="center">Expense Details Page</h3> | <img
+  />
+  <h3 align="center">Expense Details Page</h3><img
   src="https://i.imgur.com/HjyRP1s.png"
   width="700"
-  /> |
+  />
 
-    ## :computer: Technologies Used
+  
+  ## :computer: Technologies Used
   ![MongoDB](https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white)
   ![Styled Components](https://img.shields.io/badge/styled--components-DB7093?style=for-the-badge&logo=styled-components&logoColor=white)
   ![MUI](https://img.shields.io/badge/MUI-%230081CB.svg?style=for-the-badge&logo=mui&logoColor=white)

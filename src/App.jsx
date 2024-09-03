@@ -18,6 +18,7 @@ export const AuthedUserContext = createContext(null);
 const App = () => {
   const [user, setUser] = useState(authService.getUser()); // using the method from authservice
   const [budgets, setBudgets] = useState([])
+  const [canEditUsers, setCanEditUsers] = useState([])
 
   const [isFormOpen, setIsFormOpen] = useState(false)
   // const [expenses, setExpenses] = useState([])
@@ -26,8 +27,9 @@ const App = () => {
 
   useEffect(() => {
     const fetchBudgets = async () => {
-      const budgetData = await budgetService.indexBudgets()
-      setBudgets(budgetData)
+      const data = await budgetService.indexBudgets()
+      setBudgets(data.budgets)
+      setCanEditUsers(data.users)
     }
     if (user) fetchBudgets()
   }, [user])
@@ -103,13 +105,14 @@ const App = () => {
               />} />
               <Route path="/budgets/new" element={<BudgetForm
                 handleAddBudget={handleAddBudget}
+                canEditUsers={canEditUsers}
               />} />
               <Route path="/budgets/:budgetId" element={<BudgetDetails
                 handleDeleteBudget={handleDeleteBudget}
                 setBudgets={setBudgets}
               />} />
               <Route path="/budgets/:budgetId/edit" element={<BudgetForm
-                handleUpdateBudget={handleUpdateBudget}
+                handleUpdateBudget={handleUpdateBudget} canEditUsers={canEditUsers}
               />} />
               <Route path="/budgets/:budgetId/expenses/new" element={<ExpenseForm
                 handleAddExpense={handleAddExpense}

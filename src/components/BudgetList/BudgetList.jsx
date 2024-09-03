@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { Budgets, StyledLinks, StyledBudget } from './style'
 import { Chart as ChartJS, RadialLinearScale, ArcElement, Tooltip, Legend } from 'chart.js';
 import { PolarArea } from 'react-chartjs-2';
@@ -15,7 +16,7 @@ ChartJS.register(ArcElement, RadialLinearScale, Tooltip, Legend)
 
 const BudgetList = (props) => {
   let totalBudget = 0
-  const eachBudget = props.budgets.forEach((budget) => {
+  const eachBudget = props.budgets.map((budget) => {
     totalBudget = totalBudget + budget.amount
   })
 
@@ -46,6 +47,7 @@ const BudgetList = (props) => {
 
 
   const options = {}
+  
 
   return (
     <main>

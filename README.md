@@ -52,3 +52,11 @@
   ![Markdown](https://img.shields.io/badge/markdown-%23000000.svg?style=for-the-badge&logo=markdown&logoColor=white)
   ![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)
   ![Visual Studio Code](https://img.shields.io/badge/Visual%20Studio%20Code-0078d7.svg?style=for-the-badge&logo=visual-studio-code&logoColor=white)
+
+## :satellite: Upcoming Features
+
+[:x:] Ability to share budgets with multiple users
+
+[:x:] Filter out personally created budgets vs. shared budgets
+
+[:x:] Update styling on landing page

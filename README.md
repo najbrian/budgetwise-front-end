@@ -3,6 +3,7 @@
   # BudgetWise App
 
   ### [CLICK TO DEMO](<https://budgetwise-app.netlify.app/>)
+  ### [CHECK OUT BACKEND](<https://github.com/najbrian/budgetwise-back-end/>)
 
   ##### Brian Na
 

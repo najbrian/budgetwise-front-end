@@ -3,7 +3,6 @@
   # BudgetWise App
 
   ### [CLICK TO DEMO](<https://budgetwise-app.netlify.app/>)
-  ### [CHECK OUT BACKEND](<https://github.com/najbrian/budgetwise-back-end/>)
 
   ##### Brian Na
 
@@ -16,6 +15,7 @@
   
   Take control of your finances with ease. Track spending, set goals, and get insightful reports—all in one place. Start optimizing your budget today.
   
+  ### [CHECK OUT BACKEND](<https://github.com/najbrian/budgetwise-back-end/>)
   </div>
 
 ## :camera_flash: Screenshots 
